@@ -53,7 +53,7 @@ public class L {
     public static void i(String msg) {
         if (isShowLog) {
             if (isShowLine) {
-                Log.i(TAG, generateLocationMsg() + msg);
+                Log.i(TAG + " " + generateLocationMsg(), msg);
             } else {
                 Log.i(TAG, msg);
             }
@@ -63,7 +63,7 @@ public class L {
     public static void d(String msg) {
         if (isShowLog) {
             if (isShowLine) {
-                Log.d(TAG, generateLocationMsg() + msg);
+                Log.d(TAG + " " + generateLocationMsg(), msg);
             } else {
                 Log.d(TAG, msg);
             }
@@ -73,7 +73,7 @@ public class L {
     public static void e(String msg) {
         if (isShowLog) {
             if (isShowLine) {
-                Log.e(TAG, generateLocationMsg() + msg);
+                Log.e(TAG + " " + generateLocationMsg(), msg);
             } else {
                 Log.e(TAG, msg);
             }
@@ -83,7 +83,7 @@ public class L {
     public static void v(String msg) {
         if (isShowLog) {
             if (isShowLine) {
-                Log.v(TAG,msg);
+                Log.v(TAG + " " + generateLocationMsg(), msg);
             } else {
                 Log.v(TAG, msg);
             }
