@@ -27,7 +27,7 @@ public class MyThreadPool {
 
     //构造方法私有化
     private MyThreadPool() {
-        /**
+        /*
          * 给corePoolSize赋值：当前设备可用处理器核心数*2 + 1,能够让cpu的效率得到最大程度执行（有研究论证的）
          */
 //        int corePoolSize = Runtime.getRuntime().availableProcessors() * 2 + 1;//核心线程池的数量，同时能够执行的线程数量
