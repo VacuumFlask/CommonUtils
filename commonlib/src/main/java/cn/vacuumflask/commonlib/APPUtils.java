@@ -1,6 +1,5 @@
 package cn.vacuumflask.commonlib;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
