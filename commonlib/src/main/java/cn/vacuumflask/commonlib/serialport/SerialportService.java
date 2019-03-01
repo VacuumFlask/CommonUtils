@@ -3,6 +3,8 @@ package cn.vacuumflask.commonlib.serialport;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
@@ -31,7 +33,7 @@ public class SerialportService extends Service {
 
     private void openSerialport() {
         try {
-            mSerialPort = new SerialPort(new File(""), 123, 0);
+            mSerialPort = new SerialPort(new File(SerialPortConstants.SerialPortPath), SerialPortConstants.SerialPortBaudrate, 0);
             mInputStream = mSerialPort.getInputStream();
             mOutputStream = mSerialPort.getOutputStream();
 
@@ -111,6 +113,11 @@ public class SerialportService extends Service {
                     if (read > 0) {
                         String result = ConversionUtils.bytes2HexStr(byteArray, read);
                         L.d("串口接收数据大小：$read   字符串：$result");
+                        Intent intent = new Intent();
+                        Bundle bundle = new Bundle();
+                        bundle.putString(SerialPortConstants.SerialPortBroadcastAction_Result, result);
+                        intent.putExtras(bundle);
+                        sendBroadcast(intent);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
