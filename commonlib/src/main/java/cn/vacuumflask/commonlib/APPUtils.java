@@ -2,8 +2,18 @@ package cn.vacuumflask.commonlib;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import cn.vacuumflask.commonlib.entity.AppInfo;
 
 //App工具类
 public class APPUtils {
@@ -41,4 +51,38 @@ public class APPUtils {
             return macAddress;
         }
     }
+
+
+    /**
+     * 获取包名，主界面包名 类名 和 app名称
+     * @param context 上下文
+     * @return 所以已安装的APP信息
+     */
+    public static List<AppInfo> getAppInfos(Context context) {
+        Intent intent = new Intent(Intent.ACTION_MAIN, null);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        PackageManager pm = context.getPackageManager();
+        List<ResolveInfo> appList = pm.queryIntentActivities(intent, 0);
+        Collections.sort(appList, new ResolveInfo.DisplayNameComparator(pm));
+
+        ArrayList<AppInfo> list = new ArrayList<>();
+        for (int i = 0; i < appList.size(); i++) {
+            String pkg = appList.get(i).activityInfo.packageName;
+            String cls = appList.get(i).activityInfo.name;
+            String title = "";
+
+            try {
+                ApplicationInfo applicationInfo = pm.getPackageInfo(pkg, i).applicationInfo;
+                title = applicationInfo.loadLabel(pm).toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            list.add(new AppInfo(title, pkg, cls));
+
+        }
+
+        return list;
+    }
+
 }
