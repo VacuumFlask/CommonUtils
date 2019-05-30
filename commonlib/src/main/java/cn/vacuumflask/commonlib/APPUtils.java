@@ -8,12 +8,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import cn.vacuumflask.commonlib.entity.AppInfo;
+import cn.vacuumflask.commonlib.entity.ScreenInfo;
 
 //App工具类
 public class APPUtils {
@@ -55,6 +57,7 @@ public class APPUtils {
 
     /**
      * 获取包名，主界面包名 类名 和 app名称
+     *
      * @param context 上下文
      * @return 所以已安装的APP信息
      */
@@ -83,6 +86,25 @@ public class APPUtils {
         }
 
         return list;
+    }
+
+    /**
+     * 获取屏幕信息
+     *
+     * @param context 上下文
+     * @return 屏幕信息 返回值 可能为空
+     */
+    public static ScreenInfo getScreenInfo(Context context) {
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        if (dm == null) {
+            return null;
+        }
+
+        ScreenInfo info = new ScreenInfo();
+        info.setWidth(dm.widthPixels);
+        info.setHeight(dm.heightPixels);
+        info.setDensityDpi(dm.densityDpi);
+        return info;
     }
 
 }
