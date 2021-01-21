@@ -1,6 +1,6 @@
 package cn.vacuumflask.commonlib.adapter;
 
-import android.databinding.ViewDataBinding;
+import androidx.databinding.ViewDataBinding;
 import android.view.View;
 
 import androidx.annotation.NonNull;

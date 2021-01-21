@@ -39,10 +39,21 @@ android {
         }
     }
 
+    ndkVersion "16.1.4479499"
+
+    buildFeatures {
+
+        dataBinding true
+
+        // for view binding:
+         viewBinding true
+    }
+
+   /*
     dataBinding {
         enabled = true
     }
-
+    */
 }
 
 dependencies {
