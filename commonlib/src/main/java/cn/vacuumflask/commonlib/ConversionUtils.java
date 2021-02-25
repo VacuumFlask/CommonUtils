@@ -35,6 +35,28 @@ public class ConversionUtils {
         return sBuffer.toString().toUpperCase();
     }
 
+    /**
+     * 字节数组转换成对应的16进制表示的字符串
+     *
+     * @param data 目标数组
+     * @return 大写字符串
+     */
+    public static String BytesToHexString(byte[] data) {
+        StringBuilder stringBuilder = new StringBuilder("");
+        if (data == null || data.length <= 0) {
+            return null;
+        }
+        for (byte b : data) {
+            int v = b & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                stringBuilder.append(0);
+            }
+            stringBuilder.append(hv);
+        }
+        return stringBuilder.toString();
+    }
+
 
     /**
      * 把十六进制表示的字节数组字符串，转换成十六进制字节数组
